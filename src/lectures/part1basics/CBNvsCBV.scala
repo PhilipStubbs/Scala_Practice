@@ -12,7 +12,6 @@ object CBNvsCBV extends App {
 		println("by name: " + x);
 	}
 
-
 	def infinite(): Int = 1 + infinite();
 	def printFirst(x: Int, y: => Int) = println(x);
 
