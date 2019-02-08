@@ -3,24 +3,27 @@ package lectures.part1basics
 object CBNvsCBV extends App {
 
 	def callByValue(x: Long): Unit = {
-		println("by value: " + x);
-		println("by value: " + x);
+		println("by value: " + x)
+		println("by value: " + x)
 	}
 
 	def callByName(x: => Long): Unit = {
-		println("by name: " + x);
-		println("by name: " + x);
+		println("by name: " + x)
+		println("by name: " + x)
 	}
 
 
-	def infinite(): Int = 1 + infinite();
-	def printFirst(x: Int, y: => Int) = println(x);
+	def infinite(): Int = 1 + infinite()
+	def printFirst(x: Int, y: => Int) = println(x)
 
-	callByValue(System.nanoTime());
-	callByName(System.nanoTime());
+	callByValue(System.nanoTime())
+	callByName(System.nanoTime())
 
 //	printFirst(infinite(), 34);				//infinite will crash, the '=>' Will delay the call until it is used.
-	printFirst(34, infinite());
+	val aNum = 10
+	printFirst(34, {
+		aNum + 6
+	})
 
 	/*
 		Call By Value:
