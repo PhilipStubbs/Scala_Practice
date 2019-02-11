@@ -2,6 +2,8 @@ package com.rtjvm.scala.oop.files
 
 import com.rtjvm.scala.oop.filesystem.FilesystemException
 
+import com.rtjvm.scala.oop.filesystem.State
+
 class Directory(override val parentPath: String,override val name:String, val contents: List[DirEntry])
 	extends DirEntry(parentPath, name) {
 
@@ -16,8 +18,19 @@ class Directory(override val parentPath: String,override val name:String, val co
 		else findEntry(path.head).asDirectory.findDescendant(path.tail)
 	}
 
+	def findDescendant(relativePath: String): Directory = {
+		if (relativePath.isEmpty) this
+		else findDescendant(relativePath.split(Directory.SEPARATOR).toList)
+	}
+
+
 	def addEntry(newEntry: DirEntry): Directory = {
 		new Directory(parentPath, name, contents :+ newEntry)
+	}
+
+	def removeEntry(entryName: String): Directory = {
+		if (!hasEntry(entryName)) this
+		else new Directory(parentPath, name, contents.filter(x => !x.name.equals(entryName)))
 	}
 
 	def findEntry(entryName: String): DirEntry = {
@@ -42,8 +55,6 @@ class Directory(override val parentPath: String,override val name:String, val co
 	def isDirectory: Boolean = true
 	def isFile: Boolean = false
 	def getType: String = "Directory"
-
-
 
 }
 

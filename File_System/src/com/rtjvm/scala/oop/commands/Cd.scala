@@ -8,10 +8,7 @@ class Cd(dir: String) extends Command {
 	override def apply(state: State): State = {
 		val root = state.root
 		val wd = state.wd
-		val absolutePath =
-			if (dir.startsWith(Directory.SEPARATOR)) dir
-			else if (wd.isRoot) wd.path + dir
-			else wd.path + Directory.SEPARATOR + dir
+		val absolutePath = findAbsolutePath(dir, state)
 
 		val destinationDirectory = doFindEntry(root, absolutePath)
 
@@ -20,6 +17,8 @@ class Cd(dir: String) extends Command {
 		else
 			State(root, destinationDirectory.asDirectory)
 	}
+
+
 
 	def doFindEntry(root: Directory, path: String): DirEntry = {
 		@tailrec
