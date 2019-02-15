@@ -12,14 +12,9 @@ object CBNvsCBV extends App {
 		println("by name: " + x)
 	}
 
-<<<<<<< HEAD
 
 	def infinite(): Int = 1 + infinite()
 	def printFirst(x: Int, y: => Int) = println(x)
-=======
-	def infinite(): Int = 1 + infinite();
-	def printFirst(x: Int, y: => Int) = println(x);
->>>>>>> cf6a2c1b42c8ab5e6a7d16f672294b20cb28e1da
 
 	callByValue(System.nanoTime())
 	callByName(System.nanoTime())
